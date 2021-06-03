@@ -2,6 +2,7 @@ const path = require("path");
 const webpack = require("webpack");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   // root of bundle, beginning of dependency graph
@@ -61,6 +62,26 @@ module.exports = {
       // can also set value to disable to temporarily stop reporting and auto opening of report in browser
       analyzerMode: "static", //outputs to HTML file in dist folder, called report.html
     }),
+    // invoke constructor fx
+    new WebpackPwaManifest({
+        name: "Food Event",
+        short_name: "Foodies",
+        description: "An app that allows you to view upcoming food events.",
+        // homepage for PWA relative to manifest file
+        start_url: "../index.html",
+        background_color: "#01579b",
+        theme_color: "#ffffff",
+        // fingerprints tell webpack whether to generate unique fingerprint each time new manifest generated, manifest.lhge325d.json
+        fingerprints: false,
+        // determines if link to manifest.json is added to HTML
+        inject: false,
+        icons: [{
+            src: path.resolve("assets/img/icons/icon-512x512.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            // where icons sent after web manifest is completed by plugin
+            destination: path.join("assets", "icons")
+        }]
+    })
   ],
   // default is production mode (code minified automatically)
   mode: "development",

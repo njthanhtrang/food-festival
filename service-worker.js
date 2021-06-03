@@ -66,7 +66,7 @@ self.addEventListener("activate", function (e) {
 self.addEventListener("fetch", function (e) {
   // log URL of requested resource
   console.log("fetch request : " + e.request.url);
-  // intercept fetch req HTTP response, check to see if req is stored in cache or not
+  // intercept fetch req HTTP response, check to see if req is static file stored in cache or not
   e.respondWith(
     // determine if resource already exists in caches
     caches.match(e.request).then(function (request) {
