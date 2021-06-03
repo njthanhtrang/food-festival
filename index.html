@@ -169,4 +169,19 @@
       <div class="footer-copyright text-center py-3 text-white">© 2019 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.</div>        
     </footer>
 </body>
+
+<!-- register service worker, closure in module design pattern -->
+<script>
+  (function() {
+    // checks if serviceWorker exists on global navigator obj
+    // info on which browser a visitor is using
+    if("serviceWorker" in navigator) {
+      // relative path
+      navigator.serviceWorker.register("./service-worker.js")
+        .then(() => console.log("Service Worker registered successfully."))
+        .catch(error => console.log("Service Worker registration failed:", error));
+    }
+  })();
+  </script>
+
 </html>
